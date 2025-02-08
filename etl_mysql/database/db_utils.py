@@ -19,11 +19,14 @@ class DatabaseManager:
 
         try:
             with open(SCHEMA_FILE, "r") as sql_file:
-                query = sql_file.read()
+                queries = sql_file.read().split(";")
 
             with self.engine.connect() as conn:
-                conn.execute(text(query))
-                conn.commit()
+                for query in queries:
+                    query = query.strip()
+                    if query:
+                        conn.execute(text(query))  
+                        conn.commit()
 
             print("All tables checked/created.")
         except Exception as e:
