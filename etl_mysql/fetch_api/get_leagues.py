@@ -1,10 +1,9 @@
-import os
 import requests
 import pandas as pd
 from dotenv import load_dotenv
 load_dotenv()
 
-from config import API_BASE_URL, HEADERS
+from config import API_BASE_URL_V3, HEADERS
 
 # League Lists
 leagues = ['Premier League', 'Championship', 'La Liga', 'Segunda División', 'Bundesliga', '2. Bundesliga', 'Ligue 1', 'Ligue 2', 'Serie A', 'Serie B'
@@ -15,7 +14,7 @@ def get_league_data():
     leagues_list =[]
 
     for league in leagues:
-        url = f"{API_BASE_URL}/leagues"
+        url = f"{API_BASE_URL_V3}/leagues"
         params = {"name": league}
 
         response = requests.get(url, headers=HEADERS, params=params)
